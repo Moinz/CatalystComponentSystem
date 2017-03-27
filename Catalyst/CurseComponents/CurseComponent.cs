@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,22 +9,22 @@ using UnityEngine;
 *	Copyright © 2017 All Rights Reserved
 *	
 *	<summary>  
-*   	Ultimate Inferno Spell
+*   	Description Here
 *   </summary>
 */
 
 namespace CrimsonCouncil.Moin.Catalyst
 {
-    public class UltimateComponentInferno : UltimateComponent
+    public class CurseComponent : MonoBehaviour, ICurseComponent
     {
-        public override void Ultimate(Vector3 position)
+        public void Curse()
         {
-            Debug.Log("Ultimate Spell: " + position.ToString());
+            Debug.Log("Cuuuuuurse");
         }
 
-        public override string ToString()
+        public void Initialize()
         {
-            return "Ultimate Inferno";
+            throw new NotImplementedException();
         }
     }
 }

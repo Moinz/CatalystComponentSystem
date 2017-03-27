@@ -12,8 +12,11 @@ using UnityEngine;
 *   </summary>
 */
 
-public interface IEffectComponent
+namespace CrimsonCouncil.Moin.Catalyst
 {
-    void Effect(Vector3 position);
-    void Initialize();
+    public interface IEffectComponent
+    {
+        IEnumerator Effect(Vector3 position);
+        void Initialize();
+    }
 }

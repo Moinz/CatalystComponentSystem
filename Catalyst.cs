@@ -12,54 +12,49 @@ using UnityEngine;
 *   </summary>
 */
 
-public class Catalyst : MonoBehaviour 
+namespace CrimsonCouncil.Moin.Catalyst
 {
-    [Header("Main Components")]
-    [SerializeField]
-    MeleeComponent meleeComponent;
-    [SerializeField]
-    CurseComponent curseComponent;
-    [SerializeField]
-    MeleeEffect meleeEffect;
-
-    public int assignedPoints;
-
-    private void Start ()
+    public class Catalyst : MonoBehaviour 
     {
-        GenerateCatalyst(0, "Balthazar's");
-        assignedPoints = 25;
-    }
-    private void Update ()
-    {
-        if (Input.GetMouseButtonDown(0))
+        [Header("Main Components")]
+        [SerializeField]
+        MeleeComponent meleeComponent;
+        [SerializeField]
+        CurseComponent curseComponent;
+        [SerializeField]
+        MeleeEffect meleeEffect;
+
+        public int assignedPoints;
+
+        private void Start ()
         {
-            Attack();
+            GenerateCatalyst(0);
+            assignedPoints = 25;
         }
-    }
+        private void Update ()
+        {
+            if (Input.GetButtonDown("Melee"))
+            {
+                Attack();
+            }
+        }
 
-    void GenerateCatalyst(int index)
-    {
-        meleeComponent = Instantiate(SeedManager.Instance.GetMeleeComponent());
-        meleeComponent.transform.parent = transform;
-        meleeComponent.Initialize(assignedPoints);
-    }
+        void GenerateCatalyst(int index)
+        {
+            meleeComponent = Instantiate(SeedManager.Instance.GetMeleeComponent());
+            meleeComponent.transform.parent = transform;
+            meleeComponent.Initialize(assignedPoints);
+        }
 
-    void GenerateCatalyst(int index, string name)
-    {
-        meleeComponent = Instantiate(SeedManager.Instance.GetMeleeComponent());
-        meleeComponent.transform.parent = transform;
-        meleeComponent.Initialize(assignedPoints);
-        meleeComponent.name = name + " " + meleeComponent.ToString();
-    }
+        void Attack ()
+        {
+            meleeComponent.Attack(PlayerMovement.PlayerDirectionIndex);
 
-    void Attack ()
-    {
-        meleeComponent.Attack(Input.mousePosition);
+            if (curseComponent != null)
+                curseComponent.Curse();
 
-        if (curseComponent != null)
-            curseComponent.Curse();
-
-        if (meleeEffect != null)
-            meleeEffect.Effect(Input.mousePosition);
+            if (meleeEffect != null)
+                meleeEffect.Effect(Input.mousePosition);
+        }
     }
 }

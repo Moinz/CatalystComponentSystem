@@ -10,12 +10,14 @@ using UnityEngine;
 *   </summary>
 */
 
-public interface IMeleeComponent
+namespace CrimsonCouncil.Moin.Catalyst
 {
-    float Damage { get; }
-    float AttackSpeed { get; }
-    int Cost { get; }
+    public interface IMeleeComponent
+    {
+        float Damage { get; }
+        float AttackSpeed { get; }
 
-    void Attack(Vector3 direction);
-    void Initialize(int points);
+        void Attack(int index);
+        void Initialize(int points);
+    }
 }

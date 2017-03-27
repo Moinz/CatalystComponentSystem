@@ -12,12 +12,15 @@ using UnityEngine;
 *   </summary>
 */
 
-public interface ISpellComponent
+namespace CrimsonCouncil.Moin.Catalyst
 {
-    float Range { get; }
-    float ManaCost { get; }
-    int Cost { get; }
+    public interface ISpellComponent
+    {
+        float Range { get; }
+        float ManaCost { get; }
+        Projectile Projectile { get; }
 
-    void Fire(Vector3 direction);
-    void Initialize(int points); 
+        void Fire(int directionIndex);
+        void Initialize(int points);
+    }
 }

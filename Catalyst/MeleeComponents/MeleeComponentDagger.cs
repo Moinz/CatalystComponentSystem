@@ -12,15 +12,13 @@ using UnityEngine;
 *   </summary>
 */
 
-public class MeleeComponentDagger : MeleeComponent
+namespace CrimsonCouncil.Moin.Catalyst
 {
-    public override void Attack(Vector3 direction)
+    public class MeleeComponentDagger : MeleeComponent
     {
-        Debug.Log("Dagger Attack: " + direction.ToString());
-    }
-
-    public override string ToString()
-    {
-        return "Dagger";
+        public override string ToString()
+        {
+            return "Dagger";
+        }
     }
 }

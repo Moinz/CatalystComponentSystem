@@ -12,8 +12,11 @@ using UnityEngine;
 *   </summary>
 */
 
-public interface ICurseComponent
+namespace CrimsonCouncil.Moin.Catalyst
 {
-    void Curse();
-    void Initialize();
+    public interface ICurseComponent
+    {
+        void Curse();
+        void Initialize();
+    }
 }

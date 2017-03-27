@@ -13,60 +13,110 @@ using UnityEngine;
 *   </summary>
 */
 
-public class SpellComponent : MonoBehaviour, ISpellComponent
+namespace CrimsonCouncil.Moin.Catalyst
 {
-    [Header("Exposed Variables")]
-    [SerializeField]
-    float range;
-
-    [SerializeField]
-    float manaCost;
-
-    [SerializeField]
-    int cost;
-
-    #region Properties
-    public int Cost
+    public class SpellComponent : MonoBehaviour, ISpellComponent
     {
-        get
+        [Header("Exposed Variables")]
+        [SerializeField]
+        float range;
+
+        [SerializeField]
+        float manaCost;
+
+        [SerializeField]
+        Projectile projectile;
+
+        [SerializeField]
+        EffectComponent onHitEffect;
+
+        #region Properties
+
+        public float ManaCost
         {
-            return cost;
+            get
+            {
+                return manaCost;
+            }
         }
-    }
 
-    public float ManaCost
-    {
-        get
+        public float Range
         {
-            return manaCost;
+            get
+            {
+                return range;
+            }
         }
-    }
 
-    public float Range
-    {
-        get
+        public Projectile Projectile
         {
-            return range;
+            get
+            {
+                return projectile;
+            }
         }
-    }
-    #endregion
 
-    public virtual void Fire(Vector3 direction)
-    {
-        // Needs implementation of Fire
-        Debug.Log("Basic Spell: " + direction);
-    }
+        public EffectComponent OnHitEffect
+        {
+            get
+            {
+                return onHitEffect;
+            }
 
-    public virtual void Initialize (int points)
-    {
-        // Procedural Generation of the Spell Component, Needs Implementation
-        manaCost = points / 2;
-        range = points / 5;
-        cost = Mathf.RoundToInt((Range * 2) - ManaCost);
-    }
+            set
+            {
+                value = onHitEffect;
+            }
+        }
+        #endregion
 
-    public override string ToString()
-    {
-        return "Hand";
+        public virtual void Fire(int directionIndex)
+        {
+            int tempIndex = HandleIndex(directionIndex, 0);
+            HandleProjectile(tempIndex);
+        }
+
+        public void HandleProjectile(int handledIndex)
+        {
+            Vector2 direction = PlayerMovement.Directions[handledIndex];
+            Projectile temp = Instantiate(projectile, transform.position + PlayerMovement.Origins[handledIndex], Quaternion.identity);
+            temp.transform.parent = transform;
+
+            EffectComponent tempEffect = Instantiate(onHitEffect, temp.transform.position, Quaternion.identity);
+            tempEffect.transform.SetParent(temp.transform);
+            temp.Launch(direction);
+        }
+
+        public int HandleIndex(int index, int amount)
+        {
+            if (index + amount > 8)
+            {
+                return index + amount - 8;
+            }
+            else if (index + amount < 1)
+            {
+                return index + amount + 8;
+            }
+            else
+            {
+                return index + amount;
+            }
+        }
+
+        public virtual void Initialize(int points)
+        {
+            name = "Balthazar's " + ToString();
+            // Procedural Generation of the Spell Component, Needs Implementation
+            manaCost = points / 2;
+            range = points / 5;
+
+            onHitEffect = SeedManager.Instance.GetOnHitEffect();
+            projectile = SeedManager.Instance.GetProjectileComponent();
+        }
+
+        public override string ToString()
+        {
+            return "Hand";
+        }
     }
 }

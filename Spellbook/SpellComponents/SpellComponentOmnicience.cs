@@ -1,4 +1,3 @@
-
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,20 +5,19 @@ using UnityEngine;
 
 namespace CrimsonCouncil.Moin.Catalyst
 {
-    public class SpellComponentTwinned : SpellComponent
+    public class SpellComponentOmnicience : SpellComponent
     {
         public override void Fire(int directionIndex)
         {
-            int tempIndex = HandleIndex(directionIndex, 0);
-            HandleProjectile(tempIndex);
-
-            tempIndex = HandleIndex(directionIndex, 4);
-            HandleProjectile(tempIndex);
+            for (int i = 1; i <= 8; i++)
+            {
+                HandleProjectile(i);
+            }
         }
 
         public override string ToString()
         {
-            return "Twinned";
+            return "Omnicience";
         }
     }
 }

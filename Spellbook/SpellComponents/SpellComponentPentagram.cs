@@ -2,15 +2,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpellComponentPentagram : SpellComponent
+namespace CrimsonCouncil.Moin.Catalyst
 {
-	public override void Fire(Vector3 direction)
+    public class SpellComponentPentagram : SpellComponent
     {
-        Debug.Log("Pentagram Attack: " + direction.ToString());
-    }
+        public override void Fire(int directionIndex)
+        {
+            int tempIndex = HandleIndex(directionIndex, 0);
+            HandleProjectile(tempIndex);
 
-    public override string ToString()
-    {
-        return "Pentagram";
+            tempIndex = HandleIndex(directionIndex, -1);
+            HandleProjectile(tempIndex);
+
+            tempIndex = HandleIndex(directionIndex, 1);
+            HandleProjectile(tempIndex);
+
+            tempIndex = HandleIndex(directionIndex, -3);
+            HandleProjectile(tempIndex);
+
+            tempIndex = HandleIndex(directionIndex, 3);
+            HandleProjectile(tempIndex);
+        }
+
+        public override string ToString()
+        {
+            return "Pentagram";
+        }
     }
 }

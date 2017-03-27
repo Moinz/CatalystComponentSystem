@@ -13,16 +13,15 @@ using UnityEngine;
 *   </summary>
 */
 
-public class MeleeEffect : MonoBehaviour, IEffectComponent
+namespace CrimsonCouncil.Moin.Catalyst
 {
-    public void Effect(Vector3 position)
+    [System.Serializable]
+    public class MeleeEffect : EffectComponent
     {
-        Debug.Log("On Hit Melee Effect");
-    }
-
-    public void Initialize()
-    {
-        // Implement me baby;
-        throw new NotImplementedException();
+        public override void Initialize()
+        {
+            // Implement me baby;
+            throw new NotImplementedException();
+        }
     }
 }

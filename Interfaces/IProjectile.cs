@@ -8,15 +8,13 @@ using UnityEngine;
 *	Copyright © 2017 All Rights Reserved
 *	
 *	<summary>  
-*   	Interface for the Ultimate Spells
+*   	Interface for Projectile
 *   </summary>
 */
 
-namespace CrimsonCouncil.Moin.Catalyst
+public interface IProjectile 
 {
-    public interface IUltimateComponent
-    {
-        void Ultimate(Vector3 position);
-        void Initialize(int points);
-    }
+    void Launch(Vector2 direction);
+    void Launch(Vector2 direction, float seconds);
+    IEnumerator DespawnTimer(float seconds);
 }

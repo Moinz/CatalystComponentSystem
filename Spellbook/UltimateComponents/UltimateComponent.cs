@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,31 +13,24 @@ using UnityEngine;
 *   </summary>
 */
 
-public class UltimateComponent : MonoBehaviour, IUltimateComponent
+namespace CrimsonCouncil.Moin.Catalyst
 {
-    [Header("Exposed Fields")]
-    [SerializeField]
-    int cost;
-
-    public int Cost
+    public class UltimateComponent : MonoBehaviour, IUltimateComponent
     {
-        get
+
+        public virtual void Ultimate(Vector3 position)
         {
-            return cost;
+            Debug.Log("Ultimate Spell: " + position.ToString());
         }
-    }
-    public virtual void Ultimate(Vector3 position)
-    {
-        Debug.Log("Ultimate Spell: " + position.ToString());
-    }
 
-    public virtual void Initialize(int points)
-    {
-        cost = points;
-    }
+        public virtual void Initialize(int points)
+        {
+            name = "Balthazar's " + this.ToString();
+        }
 
-    public override string ToString()
-    {
-        return "Ultimate Spell";
+        public override string ToString()
+        {
+            return "Ultimate Spell";
+        }
     }
 }
