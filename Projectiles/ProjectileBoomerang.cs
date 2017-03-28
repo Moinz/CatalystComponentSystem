@@ -13,7 +13,7 @@ using DG.Tweening;
 *   </summary>
 */
 
-public class SineProjectile : Projectile 
+public class ProjectileBoomerang : Projectile 
 {
     public override void Launch(Vector2 direction)
     {
